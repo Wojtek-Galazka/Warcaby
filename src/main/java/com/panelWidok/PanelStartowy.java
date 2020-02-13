@@ -1,58 +1,89 @@
 package com.panelWidok;
-
-
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelStartowy extends JPanel {
-    JLayeredPane layeredPane;
-    JLabel imageContainer = new JLabel();
-    JButton jButtonGraj = new JButton("WYBIERZ GRACZY");
+public class panelStartowy extends JPanel {
 
+    JTextField nazwaGracz1, nazwaGracz2;
+    JButton grajJButton;
+    public static oknoStartowe oknoStartowe = new oknoStartowe();
 
+    public panelStartowy(){
+        setLayout(null);
 
-    public PanelStartowy(){
-        setSize(800,1300);
-        setLocation(0,160);
-        dodajPanel2();
-        setjButtonGrajAkcja();
-
-
+        setSize(500,500);
+        setLocation(150,315);
+        dodajPola();
+        grajJButtonAkcja();
     }
-    public void setjButtonGrajAkcja(){
-        jButtonGraj.addActionListener(new ActionListener() {
+
+    public void grajJButtonAkcja(){
+        grajJButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new OknoWyborGraczy();
-                    }
-                });
+                if (czyWprowadzonoNazwyGraczy()){
+                    EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            new oknoGry();
+                            oknoStartowe.setVisible(false);
+
+                        }
+                    });
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "PODAJ NAZWE GRACZA");
+
+                }
 
             }
         });
     }
 
-    public void dodajPanel2(){
-        String url = "D:\\Work\\Java\\Warcaby\\grafika\\szachownica.gif";
-        ImageIcon icone = new ImageIcon(url);
-        JLabel szachownica = new JLabel(icone);
-        szachownica.setOpaque(true);
-        szachownica.setSize(800,800);
-        jButtonGraj.setBounds(175,200,450,350);
-        jButtonGraj.setLayout(null);
-        this.layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(800, 1300));
-        layeredPane.add(imageContainer, new Integer(50));
-        layeredPane.add(jButtonGraj, new Integer(100));
-        layeredPane.add(szachownica, new Integer(1));
-        this.add(layeredPane);
+    public void dodajPola(){
+
+        Font sansbold14 = new Font("SansSerif", Font.BOLD, 40);
+        Color color = new Color(0,60,0);
+
+        JLabel jLabel1 = new JLabel("WYBOR GRACZY");
+        jLabel1.setBounds(70,25,400,40);
+        jLabel1.setFont(sansbold14);
+
+
+        add(jLabel1);
+
+        JLabel jLabel = new JLabel("Gracz 1");
+        jLabel.setBounds(50,80,200,100);
+        jLabel.setFont(new Font("",Font.ROMAN_BASELINE,30));
+        add(jLabel);
+
+        JLabel jLabel2 = new JLabel("Gracz 2");
+        jLabel2.setBounds(50,150,200,100);
+        jLabel2.setFont(new Font("",Font.ROMAN_BASELINE,30));
+        add(jLabel2);
+
+        nazwaGracz1 = new JTextField();
+        nazwaGracz1.setBounds(200,120,200,30);
+        add(nazwaGracz1);
+
+        nazwaGracz2 = new JTextField();
+        nazwaGracz2.setBounds(200,190,200,30);
+        add(nazwaGracz2);
+
+        grajJButton = new JButton("Graj");
+        grajJButton.setBounds(150,300,200,60);
+        add(grajJButton);
     }
 
-
+    public boolean czyWprowadzonoNazwyGraczy(){
+        if(!nazwaGracz1.getText().equals("") && !nazwaGracz2.getText().equals(""))
+            return true;
+        else
+            return false;
+    }
 
 
 
