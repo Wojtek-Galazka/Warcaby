@@ -49,20 +49,23 @@ public class szachownica extends JPanel implements MouseListener {
         int x = 20, y = 20, wielkoscPlanszy = 800;
         int wielkoscPola = 100;
         int licznik = 0;
+        Color aktualnyKolor = g.getColor();
         for (int i = x; i<=wielkoscPlanszy; i+=wielkoscPola*2, licznik++){
             if(licznik != 2){
                 for (int j = y; j <=wielkoscPlanszy; j+=wielkoscPola*2 ){
-                    g.fillOval(i,j,60,60);
+                    g.fillOval(j,i,60,60);
                 }
-            }
+            }else g.setColor(Color.black);
         }
         licznik = 0;
+        g.setColor(aktualnyKolor);
+        
         for( int i = wielkoscPola + x; i<=wielkoscPlanszy+wielkoscPola; i +=wielkoscPola*2, licznik++){
             if(licznik != 1) {
                 for (int j = wielkoscPola + x; j <= wielkoscPola + wielkoscPlanszy; j += wielkoscPola * 2) {
-                    g.fillOval(i, j, 60, 60);
+                    g.fillOval(j, i, 60, 60);
                 }
-            }
+            }else g.setColor(Color.black);
         }
     }
 
