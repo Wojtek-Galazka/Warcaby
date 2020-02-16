@@ -13,7 +13,6 @@ public class panelStartowy extends JPanel {
 
     public panelStartowy(){
         setLayout(null);
-
         setSize(500,500);
         setLocation(150,315);
         dodajPola();

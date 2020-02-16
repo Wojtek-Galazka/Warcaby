@@ -5,14 +5,11 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-public class oknoStartowe extends JFrame implements WindowListener {
+public class oknoStartowe extends JFrame {
 
     public oknoStartowe() {
         ustawParametry();
         NazwaGry();
-
-
-
     }
 
     public void ustawParametry() {
@@ -41,42 +38,5 @@ public class oknoStartowe extends JFrame implements WindowListener {
         add(szachownica);
     }
 
-
-    @Override
-    public void windowOpened(WindowEvent e) {
-        setVisible(true);
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-        setVisible(false);
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
 }
 
