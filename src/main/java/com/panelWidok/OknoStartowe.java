@@ -1,12 +1,18 @@
 package com.panelWidok;
 
+import sun.audio.AudioData;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+import sun.audio.ContinuousAudioDataStream;
+
+import javax.sound.sampled.*;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class oknoStartowe extends JFrame {
-
+    private static Clip clip;
     public oknoStartowe() {
         ustawParametry();
         NazwaGry();
@@ -21,8 +27,6 @@ public class oknoStartowe extends JFrame {
         add(new panelStartowy());
     }
 
-
-
     public void NazwaGry() {
         String ikona = "grafika\\WARCABY.png";
         ImageIcon icone = new ImageIcon(ikona);
@@ -36,6 +40,39 @@ public class oknoStartowe extends JFrame {
         szachownica.setSize(800,800);
         szachownica.setLocation(0,170);
         add(szachownica);
+    }
+
+
+    private static void muzykaTlo(){
+
+        try {
+            File yourFile;
+            AudioInputStream stream;
+            AudioFormat format;
+            DataLine.Info info;
+
+            stream = AudioSystem.getAudioInputStream(new File("muzyka\\muzykaTlo.wav"));
+            format = stream.getFormat();
+            info = new DataLine.Info(Clip.class, format);
+            clip = (Clip) AudioSystem.getLine(info);
+            clip.open(stream);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+        catch (Exception e) {
+            //whatevers
+        }
+    }
+
+    public static void muzykaStart(){
+        if(clip !=null)
+            clip.start();
+        else
+            muzykaTlo();
+    }
+
+    public static void muzykaStop(){
+        clip.stop();
     }
 
 }

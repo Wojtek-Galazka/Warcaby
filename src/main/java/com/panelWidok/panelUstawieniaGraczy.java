@@ -9,6 +9,9 @@ public class panelUstawieniaGraczy extends JPanel {
 
     public static Color kolorPionkowGracz1 = Color.BLACK;
     public static Color kolorPionkowGracz2 = Color.GRAY;
+    JButton wybranyKolorGracz1;
+
+    JButton wybranyKolorGracz2;
 
 
     public panelUstawieniaGraczy(){
@@ -20,6 +23,9 @@ public class panelUstawieniaGraczy extends JPanel {
         gracz2Ustawienia();
         dodajKoloryDoWyboruGracz1(150,65);
         dodajKoloryDoWyboruGracz2(560,65);
+        dodajPrzyciski();
+        wczytajKolorGracza1();
+        wczytajKolorGracza2();
     }
 
     public void gracz1Ustawienia(){
@@ -32,12 +38,16 @@ public class panelUstawieniaGraczy extends JPanel {
         jLabelGracz1.setFont(font);
         jLabelGracz1.setBounds(150,10,200,30);
         add(jLabelGracz1);
+        wybranyKolorGracz1 = new JButton();
+        wybranyKolorGracz1.setBounds(246,15,20,20);
+        add(wybranyKolorGracz1);
 
         Font f = new Font("SansSerif", Font.BOLD, 15);
         JLabel jLabelKolorPionkow = new JLabel("Kolor pionkow:");
         jLabelKolorPionkow.setFont(f);
         jLabelKolorPionkow.setBounds(30,60,200,30);
         add(jLabelKolorPionkow);
+
 
     }
 
@@ -51,6 +61,11 @@ public class panelUstawieniaGraczy extends JPanel {
         jLabelGracz2.setFont(font);
         jLabelGracz2.setBounds(520,10,200,30);
         add(jLabelGracz2);
+        wybranyKolorGracz2 = new JButton();
+        wybranyKolorGracz2.setBounds(616,15,20,20);
+        add(wybranyKolorGracz2);
+
+
 
         JLabel jLabelKolorPionkow = new JLabel("Kolor pionkow:");
         Font f = new Font("SansSerif", Font.BOLD, 15);
@@ -59,8 +74,9 @@ public class panelUstawieniaGraczy extends JPanel {
         add(jLabelKolorPionkow);
     }
 
-    public void dodajKoloryDoWyboruGracz1(int x, int y){
 
+
+    public void dodajKoloryDoWyboruGracz1(int x, int y){
         Color colors [] = new Color[]{Color.black,Color.blue,Color.pink,Color.green, Color.orange};
         for (int i = 0; i < colors.length; i++){
             final JButton jButton  = new JButton();
@@ -73,13 +89,13 @@ public class panelUstawieniaGraczy extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     kolorPionkowGracz1 =  ((JButton) e.getSource()).getBackground();
+                    wybranyKolorGracz1.setBackground(kolorPionkowGracz1);
                 }
             });
         }
     }
 
     public void dodajKoloryDoWyboruGracz2(int x, int y){
-
         Color colors [] = new Color[]{Color.black,Color.blue,Color.pink,Color.green, Color.orange};
         for (int i = 0; i < colors.length; i++){
             final JButton jButton  = new JButton();
@@ -92,8 +108,42 @@ public class panelUstawieniaGraczy extends JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     kolorPionkowGracz2 =  ((JButton) e.getSource()).getBackground();
+                    wybranyKolorGracz2.setBackground(kolorPionkowGracz2);
                 }
             });
         }
     }
+
+    public void dodajPrzyciski(){
+        JButton wroc = new JButton("Wróć");
+        wroc.setBounds(200,240,150,50);
+        add(wroc);
+        wroc.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelStartowy.oknoUstawien.setVisible(false);
+            }
+        });
+
+
+        JButton zatwierdz = new JButton("Zatwierdź");
+        zatwierdz.setBounds(440,240,150,50);
+        add(zatwierdz);
+        zatwierdz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelStartowy.oknoUstawien.setVisible(false);
+
+            }
+        });
+    }
+
+    private void wczytajKolorGracza1(){
+        wybranyKolorGracz1.setBackground(kolorPionkowGracz1);
+    }
+
+    private void wczytajKolorGracza2(){
+        wybranyKolorGracz2.setBackground(kolorPionkowGracz2);
+    }
+
 }

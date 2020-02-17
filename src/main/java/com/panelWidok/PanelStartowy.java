@@ -10,6 +10,9 @@ public class panelStartowy extends JPanel {
     JButton grajJButton;
     JButton ustawieniaJButton;
     public static oknoStartowe oknoStartowe = new oknoStartowe();
+    public static oknoUstawien oknoUstawien;
+    public static oknoGry oknoGry;
+
 
 
     public panelStartowy(){
@@ -29,7 +32,8 @@ public class panelStartowy extends JPanel {
                     EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            new oknoGry();
+                            oknoGry = new oknoGry();
+                            oknoGry.setVisible(true);
                             oknoStartowe.setVisible(false);
 
                         }
@@ -51,7 +55,8 @@ public class panelStartowy extends JPanel {
                 EventQueue.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        new oknoUstawien();
+                        oknoUstawien = new oknoUstawien();
+                        oknoUstawien.setVisible(true);
                     }
                 });
             }

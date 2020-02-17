@@ -7,11 +7,11 @@ public class oknoUstawien extends JFrame {
     public oknoUstawien(){
         setLayout(null);
         setTitle("Ustawienia");
-        setSize(800, 600);
-        setLocation(100, 200);
+        setSize(800, 500);
+        setLocation(100, 280);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        setVisible(true);
+        setVisible(false);
         add(new panelUstawieniaGlobalne());
         add(new panelUstawieniaGraczy());
 
