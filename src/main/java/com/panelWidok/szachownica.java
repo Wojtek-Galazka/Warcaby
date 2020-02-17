@@ -12,7 +12,7 @@ public class szachownica extends JPanel implements MouseListener {
 
     public szachownica(){
         setSize(800,800);
-        setLocation(0,10);
+        setLocation(0,80);
         setLayout(null);
 
     }
@@ -29,7 +29,7 @@ public class szachownica extends JPanel implements MouseListener {
     private void rysujSzachownice(Graphics g){
         int x = 0, y = 0, wielkoscPlanszy = 800;
         int wielkoscPola = 100;
-        g.setColor(new Color(112,54,67));
+        g.setColor(panelUstawieniaGlobalne.kolorSzachwonicy);
         g.fillRect(x,y,wielkoscPlanszy,wielkoscPlanszy);
 
         for (int i = x; i<=wielkoscPlanszy; i+=wielkoscPola*2){
@@ -46,26 +46,29 @@ public class szachownica extends JPanel implements MouseListener {
     }
 
     private void rysujPionki(Graphics g){
+        Color gracz1 = panelUstawieniaGraczy.kolorPionkowGracz1;
+        Color gracz2 = panelUstawieniaGraczy.kolorPionkowGracz2;
         int x = 20, y = 20, wielkoscPlanszy = 800;
         int wielkoscPola = 100;
         int licznik = 0;
-        Color aktualnyKolor = g.getColor();
+        Color aktualnyKolor = gracz1;
+        g.setColor(gracz1);
         for (int i = x; i<=wielkoscPlanszy; i+=wielkoscPola*2, licznik++){
             if(licznik != 2){
                 for (int j = y; j <=wielkoscPlanszy; j+=wielkoscPola*2 ){
                     g.fillOval(j,i,60,60);
                 }
-            }else g.setColor(Color.black);
+            }else g.setColor(gracz2);
         }
         licznik = 0;
         g.setColor(aktualnyKolor);
-        
+
         for( int i = wielkoscPola + x; i<=wielkoscPlanszy+wielkoscPola; i +=wielkoscPola*2, licznik++){
             if(licznik != 1) {
                 for (int j = wielkoscPola + x; j <= wielkoscPola + wielkoscPlanszy; j += wielkoscPola * 2) {
                     g.fillOval(j, i, 60, 60);
                 }
-            }else g.setColor(Color.black);
+            }else g.setColor(gracz2);
         }
     }
 

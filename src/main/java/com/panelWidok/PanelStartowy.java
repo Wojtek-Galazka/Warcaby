@@ -1,15 +1,16 @@
 package com.panelWidok;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class panelStartowy extends JPanel {
 
-    JTextField nazwaGracz1, nazwaGracz2;
+    public static JTextField nazwaGracz1, nazwaGracz2;
     JButton grajJButton;
+    JButton ustawieniaJButton;
     public static oknoStartowe oknoStartowe = new oknoStartowe();
+
 
     public panelStartowy(){
         setLayout(null);
@@ -17,6 +18,7 @@ public class panelStartowy extends JPanel {
         setLocation(150,315);
         dodajPola();
         grajJButtonAkcja();
+        ustawieniaJButtonAkcja();
     }
 
     public void grajJButtonAkcja(){
@@ -38,6 +40,20 @@ public class panelStartowy extends JPanel {
 
                 }
 
+            }
+        });
+    }
+
+    public void ustawieniaJButtonAkcja(){
+        ustawieniaJButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new oknoUstawien();
+                    }
+                });
             }
         });
     }
@@ -75,6 +91,12 @@ public class panelStartowy extends JPanel {
         grajJButton = new JButton("Graj");
         grajJButton.setBounds(150,300,200,60);
         add(grajJButton);
+
+        ustawieniaJButton = new JButton("Ustawienia");
+        ustawieniaJButton.setBounds(20,440,100,40);
+        add(ustawieniaJButton);
+
+
     }
 
     public boolean czyWprowadzonoNazwyGraczy(){
