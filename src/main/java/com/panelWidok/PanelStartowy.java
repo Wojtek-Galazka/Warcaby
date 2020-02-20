@@ -1,21 +1,25 @@
 package com.panelWidok;
+import com.panelWidok.controler.Controler;
+import com.panelWidok.view.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class panelStartowy extends JPanel {
+public class PanelStartowy extends JPanel {
 
     public static JTextField nazwaGracz1, nazwaGracz2;
     JButton grajJButton;
     JButton ustawieniaJButton;
-    public static oknoStartowe oknoStartowe = new oknoStartowe();
+    public static OknoStartowe oknoStartowe = new OknoStartowe();
     public static oknoUstawien oknoUstawien;
-    public static oknoGry oknoGry;
+    public static View oknoGry;
+    public static Controler controler;
 
 
 
-    public panelStartowy(){
+    public PanelStartowy(){
         setLayout(null);
         setSize(500,500);
         setLocation(150,315);
@@ -32,7 +36,8 @@ public class panelStartowy extends JPanel {
                     EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
-                            oknoGry = new oknoGry();
+                            oknoGry = new View();
+                            controler = new Controler(oknoGry);
                             oknoGry.setVisible(true);
                             oknoStartowe.setVisible(false);
 

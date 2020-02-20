@@ -38,7 +38,7 @@ public class panelUstawieniaGlobalne extends JPanel {
         wlacz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                oknoStartowe.muzykaStart();
+                OknoStartowe.muzykaStart();
 
             }
         });
@@ -50,7 +50,7 @@ public class panelUstawieniaGlobalne extends JPanel {
         wylacz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                oknoStartowe.muzykaStop();
+                OknoStartowe.muzykaStop();
 
             }
         });

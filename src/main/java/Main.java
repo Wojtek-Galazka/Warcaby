@@ -1,6 +1,6 @@
-import com.panelWidok.oknoStartowe;
-import com.panelWidok.panelStartowy;
-import com.panelWidok.oknoGry;
+import com.panelWidok.OknoStartowe;
+import com.panelWidok.PanelStartowy;
+
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                oknoStartowe oknoStartowe = panelStartowy.oknoStartowe;
+                OknoStartowe oknoStartowe = PanelStartowy.oknoStartowe;
                 oknoStartowe.setVisible(true);
 
             }

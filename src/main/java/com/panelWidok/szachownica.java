@@ -1,6 +1,6 @@
 package com.panelWidok;
 
-import com.sun.scenario.effect.Color4f;
+//import com.sun.scenario.effect.Color4f;
 
 import javax.swing.*;
 import java.awt.*;
