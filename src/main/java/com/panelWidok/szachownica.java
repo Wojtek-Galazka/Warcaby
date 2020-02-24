@@ -1,10 +1,9 @@
 package com.panelWidok;
 
-import com.sun.scenario.effect.Color4f;
+//import com.sun.scenario.effect.Color4f;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -29,7 +28,7 @@ public class szachownica extends JPanel implements MouseListener {
     private void rysujSzachownice(Graphics g){
         int x = 0, y = 0, wielkoscPlanszy = 800;
         int wielkoscPola = 100;
-        g.setColor(panelUstawieniaGlobalne.kolorSzachwonicy);
+        g.setColor(PanelUstawieniaGlobalne.kolorSzachwonicy);
         g.fillRect(x,y,wielkoscPlanszy,wielkoscPlanszy);
 
         for (int i = x; i<=wielkoscPlanszy; i+=wielkoscPola*2){
@@ -46,8 +45,8 @@ public class szachownica extends JPanel implements MouseListener {
     }
 
     private void rysujPionki(Graphics g){
-        Color gracz1 = panelUstawieniaGraczy.kolorPionkowGracz1;
-        Color gracz2 = panelUstawieniaGraczy.kolorPionkowGracz2;
+        Color gracz1 = PanelUstawieniaGraczy.kolorPionkowGracz1;
+        Color gracz2 = PanelUstawieniaGraczy.kolorPionkowGracz2;
         int x = 20, y = 20, wielkoscPlanszy = 800;
         int wielkoscPola = 100;
         int licznik = 0;

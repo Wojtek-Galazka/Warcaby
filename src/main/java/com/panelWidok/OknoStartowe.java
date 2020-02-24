@@ -1,9 +1,9 @@
 package com.panelWidok;
 
-import sun.audio.AudioData;
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+//import sun.audio.AudioData;
+//import sun.audio.AudioPlayer;
+//import sun.audio.AudioStream;
+//import sun.audio.ContinuousAudioDataStream;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -11,9 +11,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class oknoStartowe extends JFrame {
+public class OknoStartowe extends JFrame {
     private static Clip clip;
-    public oknoStartowe() {
+    public OknoStartowe() {
         ustawParametry();
         NazwaGry();
     }
@@ -24,7 +24,7 @@ public class oknoStartowe extends JFrame {
         setSize(800, 1000);
         setLocation(100, 50);
         setResizable(false);
-        add(new panelStartowy());
+        add(new PanelStartowy());
     }
 
     public void NazwaGry() {

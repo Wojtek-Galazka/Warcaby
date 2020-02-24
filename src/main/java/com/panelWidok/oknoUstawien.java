@@ -12,8 +12,8 @@ public class oknoUstawien extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         setVisible(false);
-        add(new panelUstawieniaGlobalne());
-        add(new panelUstawieniaGraczy());
+        add(new PanelUstawieniaGlobalne());
+        add(new PanelUstawieniaGraczy());
 
     }
 

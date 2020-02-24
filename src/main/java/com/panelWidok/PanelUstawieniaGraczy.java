@@ -5,16 +5,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class panelUstawieniaGraczy extends JPanel {
+public class PanelUstawieniaGraczy extends JPanel {
 
-    public static Color kolorPionkowGracz1 = Color.BLACK;
+    public static Color kolorPionkowGracz1 = Color.BLUE;
     public static Color kolorPionkowGracz2 = Color.GRAY;
     JButton wybranyKolorGracz1;
 
     JButton wybranyKolorGracz2;
 
 
-    public panelUstawieniaGraczy(){
+    public PanelUstawieniaGraczy(){
         setLayout(null);
         setSize(785,300);
         setLocation(5,160);
@@ -31,9 +31,9 @@ public class panelUstawieniaGraczy extends JPanel {
     public void gracz1Ustawienia(){
         Font font = new Font("SansSerif", Font.BOLD, 25);
         String text = "";
-        if(panelStartowy.nazwaGracz1.getText().equals(""))
+        if(PanelStartowy.nazwaGracz1.getText().equals(""))
             text = "Gracz 1";
-        else text = panelStartowy.nazwaGracz1.getText();
+        else text = PanelStartowy.nazwaGracz1.getText();
         JLabel jLabelGracz1 = new JLabel(text);
         jLabelGracz1.setFont(font);
         jLabelGracz1.setBounds(150,10,200,30);
@@ -54,9 +54,9 @@ public class panelUstawieniaGraczy extends JPanel {
     public void gracz2Ustawienia(){
         Font font = new Font("SansSerif", Font.BOLD, 25);
         String text = "";
-        if(panelStartowy.nazwaGracz2.getText().equals(""))
+        if(PanelStartowy.nazwaGracz2.getText().equals(""))
             text = "Gracz 2";
-        else text = panelStartowy.nazwaGracz2.getText();
+        else text = PanelStartowy.nazwaGracz2.getText();
         JLabel jLabelGracz2 = new JLabel(text);
         jLabelGracz2.setFont(font);
         jLabelGracz2.setBounds(520,10,200,30);
@@ -121,7 +121,7 @@ public class panelUstawieniaGraczy extends JPanel {
         wroc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelStartowy.oknoUstawien.setVisible(false);
+                PanelStartowy.oknoUstawien.setVisible(false);
             }
         });
 
@@ -132,7 +132,7 @@ public class panelUstawieniaGraczy extends JPanel {
         zatwierdz.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelStartowy.oknoUstawien.setVisible(false);
+                PanelStartowy.oknoUstawien.setVisible(false);
 
             }
         });
