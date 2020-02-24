@@ -1,5 +1,7 @@
 package com.panelWidok.view;
 
+import com.panelWidok.PanelUstawieniaGlobalne;
+import com.panelWidok.PanelUstawieniaGraczy;
 import com.panelWidok.controler.Controler;
 
 import javax.swing.*;
@@ -47,10 +49,12 @@ public class View extends JFrame implements ActionListener {
         start.addActionListener(this);
 
 
-        kolorPlanszy1 = new Color(255, 120, 0);
-        kolorPlanszy2 = new Color(61, 43, 31);
-        kolorPionkow1 = Color.WHITE;
-        kolorPionkow2 = Color.BLACK;
+        kolorPlanszy1 = PanelUstawieniaGlobalne.kolorSzachwonicy;
+        kolorPlanszy2 = new Color(255-kolorPlanszy1.getRed(),
+                255-kolorPlanszy1.getGreen(),
+                255-kolorPlanszy1.getBlue());
+        kolorPionkow1 = PanelUstawieniaGraczy.kolorPionkowGracz1;
+        kolorPionkow2 = PanelUstawieniaGraczy.kolorPionkowGracz2;
 
 
         clickers = new ViewField[8][8];

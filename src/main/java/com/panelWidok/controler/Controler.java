@@ -85,8 +85,6 @@ public class Controler implements MouseListener {
                 tablicaPionkow[source.getX()][source.getY()] = oldItem + 1; // damka to po prostu  o jeden więcej patrz Config....Queen
             }
 
-
-
             oknoGry.setTableTips(tablicaTp);
             oknoGry.setTablicaPionkow(tablicaPionkow);
             oknoGry.repaint();
@@ -100,23 +98,23 @@ public class Controler implements MouseListener {
         boolean result = false;
         if (isBoundIndex(source.getX() + 1, source.getY() + 1) &&
                 tablicaPionkow[source.getX()][source.getY()] == VALUE_1 &&
-                tablicaPionkow[source.getX() + 1][source.getY() + 1] == VALUE_2) {
+                canKill(VALUE_1, tablicaPionkow[source.getX() + 1][source.getY() + 1])) {
             result = verifyAndAddTip(source.getX() + 2, source.getY() + 2);
         }
         if (isBoundIndex(source.getX() - 1, source.getY() + 1) &&
                 tablicaPionkow[source.getX()][source.getY()] == VALUE_1 &&
-                tablicaPionkow[source.getX() - 1][source.getY() + 1] == VALUE_2) {
+                canKill(VALUE_1, tablicaPionkow[source.getX() - 1][source.getY() + 1])) {
             result = result | verifyAndAddTip(source.getX() - 2, source.getY() + 2);
         }
 
         if (isBoundIndex(source.getX() + 1, source.getY() - 1) &&
                 tablicaPionkow[source.getX()][source.getY()] == VALUE_2 &&
-                tablicaPionkow[source.getX() + 1][source.getY() - 1] == VALUE_1) {
+                canKill(VALUE_2, tablicaPionkow[source.getX() + 1][source.getY() - 1])) {
             result = result | verifyAndAddTip(source.getX() + 2, source.getY() - 2);
         }
         if (isBoundIndex(source.getX() - 1, source.getY() - 1) &&
                 tablicaPionkow[source.getX()][source.getY()] == VALUE_2 &&
-                tablicaPionkow[source.getX() - 1][source.getY() - 1] == VALUE_1) {
+                canKill(VALUE_2, tablicaPionkow[source.getX() - 1][source.getY() - 1])) {
             result = result | verifyAndAddTip(source.getX() - 2, source.getY() - 2);
         }
 

@@ -5,16 +5,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class panelUstawieniaGraczy extends JPanel {
+public class PanelUstawieniaGraczy extends JPanel {
 
-    public static Color kolorPionkowGracz1 = Color.BLACK;
+    public static Color kolorPionkowGracz1 = Color.BLUE;
     public static Color kolorPionkowGracz2 = Color.GRAY;
     JButton wybranyKolorGracz1;
 
     JButton wybranyKolorGracz2;
 
 
-    public panelUstawieniaGraczy(){
+    public PanelUstawieniaGraczy(){
         setLayout(null);
         setSize(785,300);
         setLocation(5,160);

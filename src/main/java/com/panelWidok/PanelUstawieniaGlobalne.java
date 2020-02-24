@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class panelUstawieniaGlobalne extends JPanel {
+public class PanelUstawieniaGlobalne extends JPanel {
 
 
     public static Color kolorSzachwonicy = Color.black;
 
 
 
-    public panelUstawieniaGlobalne() {
+    public PanelUstawieniaGlobalne() {
         setLayout(null);
         setBackground(Color.darkGray);
         setSize(785, 150);
