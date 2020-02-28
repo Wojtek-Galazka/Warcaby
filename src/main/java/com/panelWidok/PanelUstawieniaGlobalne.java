@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
 public class PanelUstawieniaGlobalne extends JPanel {
 
@@ -54,6 +55,18 @@ public class PanelUstawieniaGlobalne extends JPanel {
 
             }
         });
+
+        JButton nastepna = new JButton("NEXT");
+        nastepna.setSize(80,40);
+        nastepna.setLocation(500,90);
+        add(nastepna);
+        nastepna.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OknoStartowe.nastepnaMuzyka();
+            }
+        });
+
 
     }
 

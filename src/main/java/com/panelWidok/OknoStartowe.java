@@ -43,7 +43,7 @@ public class OknoStartowe extends JFrame {
     }
 
 
-    private static void muzykaTlo(){
+    private static void muzykaTlo( String sciezka){
 
         try {
             File yourFile;
@@ -51,7 +51,7 @@ public class OknoStartowe extends JFrame {
             AudioFormat format;
             DataLine.Info info;
 
-            stream = AudioSystem.getAudioInputStream(new File("muzyka\\muzykaTlo.wav"));
+            stream = AudioSystem.getAudioInputStream(new File(pobierzSciezke()[aktualnyindex]));
             format = stream.getFormat();
             info = new DataLine.Info(Clip.class, format);
             clip = (Clip) AudioSystem.getLine(info);
@@ -60,16 +60,33 @@ public class OknoStartowe extends JFrame {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
         catch (Exception e) {
-            //whatevers
         }
     }
 
+    public static String [] pobierzSciezke (){
+        String [] listaSciezek = {"muzyka\\muzykaTlo.wav", "muzyka\\muzykaTlo1.wav"};
+        return listaSciezek;
+    }
+     static int aktualnyindex;
+
     public static void muzykaStart(){
+
         if(clip !=null)
             clip.start();
         else
-            muzykaTlo();
+            muzykaTlo(pobierzSciezke()[0]);
     }
+
+    public static void nastepnaMuzyka(){
+        String [] listaSciezek = pobierzSciezke();
+            if (aktualnyindex < listaSciezek.length-1)
+                aktualnyindex += 1;
+            else aktualnyindex = 0;
+            muzykaStop();
+            muzykaTlo(listaSciezek[aktualnyindex]);
+            muzykaStart();
+    }
+
 
     public static void muzykaStop(){
         clip.stop();
