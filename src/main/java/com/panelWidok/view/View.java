@@ -26,9 +26,13 @@ public class View extends JFrame implements ActionListener {
 
     public View() {
         super("Pojedynek");
-
-        setSize(900, 700);
+        setLocation(200, 50);
+        setSize(530, 570);
         //setLocationRelativeTo(okonoGry);
+        String url = "grafika\\szachownica.gif";
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        setIconImage(img);
         setLayout(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,9 +54,9 @@ public class View extends JFrame implements ActionListener {
 
 
         kolorPlanszy1 = PanelUstawieniaGlobalne.kolorSzachwonicy;
-        kolorPlanszy2 = new Color(255-kolorPlanszy1.getRed(),
-                255-kolorPlanszy1.getGreen(),
-                255-kolorPlanszy1.getBlue());
+        kolorPlanszy2 = new Color(255 - kolorPlanszy1.getRed(),
+                255 - kolorPlanszy1.getGreen(),
+                255 - kolorPlanszy1.getBlue());
         kolorPionkow1 = PanelUstawieniaGraczy.kolorPionkowGracz1;
         kolorPionkow2 = PanelUstawieniaGraczy.kolorPionkowGracz2;
 

@@ -7,6 +7,7 @@ package com.panelWidok;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,6 +21,10 @@ public class OknoStartowe extends JFrame {
 
     public void ustawParametry() {
         setLayout(null);
+        String url =  "grafika\\szachownica.gif";
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image img = kit.createImage(url);
+        setIconImage(img);
         setTitle("Warcaby");
         setSize(800, 1000);
         setLocation(100, 50);
