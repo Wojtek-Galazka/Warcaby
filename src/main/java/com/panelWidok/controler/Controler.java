@@ -13,6 +13,7 @@ public class Controler implements MouseListener {
     private View oknoGry;
     private int oldX = -1;
     private int oldY = -1;
+    private boolean isWhiteTurn = true;
     private int tablicaPionkow[][] = new int[8][8];
     private boolean tablicaTp[][] = new boolean[8][8];
 
@@ -49,8 +50,9 @@ public class Controler implements MouseListener {
 
         boolean isReadyForMove = oldX == -1 && oldY == -1;
         boolean isMoving = oldX != -1 && oldY != -1;
-        if (isReadyForMove) {
-            if (showTips(source) | showTipsForKill(source)|showTipsDamka(source)) {
+
+        if (isReadyForMove && isProperTurnClick(e)) {
+            if (showTips(source) | showTipsForKill(source) | showTipsDamka(source, false)) {
                 saveOldPosition(source);
             }
             return;
@@ -68,6 +70,24 @@ public class Controler implements MouseListener {
 
     }
 
+    private boolean isProperTurnClick(MouseEvent e) {
+        ViewField source = (ViewField) e.getSource();
+        int player = tablicaPionkow[source.getX()][source.getY()];
+        if (player == VALUE_1 || player == QUEEN_VALUE_1) {
+            if (isWhiteTurn) {
+                return true;
+            }
+        }
+
+        if (player == VALUE_2 || player == QUEEN_VALUE_2) {
+            if (!isWhiteTurn) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     private void doMove(ViewField source) {
         boolean isProperMove = tablicaTp[source.getX()][source.getY()];
         if (isProperMove) {
@@ -78,18 +98,26 @@ public class Controler implements MouseListener {
 
             int xLen = source.getX() - oldX;
             int yLen = source.getY() - oldY;
+
+            boolean killDone = tablicaPionkow[source.getX() - xLen / abs(xLen)][source.getY() - yLen / abs(yLen)] != 0;
             tablicaPionkow[source.getX() - xLen / abs(xLen)][source.getY() - yLen / abs(yLen)] = 0;
 
 
             if ((source.getY() == 7 || source.getY() == 0) && (oldItem == VALUE_1 || oldItem == VALUE_2)) {
-                tablicaPionkow[source.getX()][source.getY()] = oldItem + 1; // damka to po prostu  o jeden więcej patrz Config....Queen
+                tablicaPionkow[source.getX()][source.getY()] = oldItem + 1; // damka to po prostu  o jeden więcej Config....Queen
             }
 
             oknoGry.setTableTips(tablicaTp);
             oknoGry.setTablicaPionkow(tablicaPionkow);
             oknoGry.repaint();
-            endMoveCleanup();
 
+            if (!killDone || !showTipsForKill(source) && !showTipsDamka(source, true)) {
+                endMoveCleanup();
+            } else {
+                oldX = source.getX();
+                oldY = source.getY();
+
+            }
 
         }
     }
@@ -118,12 +146,15 @@ public class Controler implements MouseListener {
             result = result | verifyAndAddTip(source.getX() - 2, source.getY() - 2);
         }
 
+        oknoGry.setTableTips(tablicaTp);
+        oknoGry.repaint();
         return result;
     }
 
     private void endMoveCleanup() {
         oldX = -1;
         oldY = -1;
+        isWhiteTurn = !isWhiteTurn;
     }
 
     private boolean showTips(ViewField source) {
@@ -144,75 +175,83 @@ public class Controler implements MouseListener {
     }
 
     private boolean canKill(int player, int field) {
-        if(player == VALUE_1 || player == QUEEN_VALUE_1) {
+        if (player == VALUE_1 || player == QUEEN_VALUE_1) {
             if (field == VALUE_2 || field == QUEEN_VALUE_2) {
                 return true;
             }
         }
 
-        if(player == VALUE_2 || player == QUEEN_VALUE_2){
-            if(field == VALUE_1 || field == QUEEN_VALUE_1){
+        if (player == VALUE_2 || player == QUEEN_VALUE_2) {
+            if (field == VALUE_1 || field == QUEEN_VALUE_1) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean showTipsDamka(ViewField source) {
+    private boolean showTipsDamka(ViewField source, boolean showOnlyKill) {
         boolean result = false;
         int currentSelection = tablicaPionkow[source.getX()][source.getY()];
 
         if (currentSelection == QUEEN_VALUE_1 || currentSelection == QUEEN_VALUE_2) {
-            for(int i = 1; i<tablicaPionkow.length; i++){
+            for (int i = 1; i < tablicaPionkow.length; i++) {
                 if (isBoundIndex(source.getX() + i, source.getY() + i) &&
                         tablicaPionkow[source.getX() + i][source.getY() + i] != 0) {
 
-                    if (canKill(currentSelection, tablicaPionkow[source.getX() + i][source.getY() + i] )) {
-                        result = result | verifyAndAddTip(source.getX() + i+1, source.getY() + i+1);
+                    if (canKill(currentSelection, tablicaPionkow[source.getX() + i][source.getY() + i])) {
+                        result = result | verifyAndAddTip(source.getX() + i + 1, source.getY() + i + 1);
                     }
 
                     break;
                 }
-                result = result | verifyAndAddTip(source.getX() + i, source.getY() + i);
+                if (!showOnlyKill) {
+                    result = result | verifyAndAddTip(source.getX() + i, source.getY() + i);
+                }
             }
 
-            for(int i = 1; i<tablicaPionkow.length; i++){
+            for (int i = 1; i < tablicaPionkow.length; i++) {
                 if (isBoundIndex(source.getX() - i, source.getY() + i) &&
                         tablicaPionkow[source.getX() - i][source.getY() + i] != 0) {
 
-                    if (canKill(currentSelection, tablicaPionkow[source.getX() - i][source.getY() + i] )) {
-                        result = result | verifyAndAddTip(source.getX() - i - 1, source.getY() + i+1);
+                    if (canKill(currentSelection, tablicaPionkow[source.getX() - i][source.getY() + i])) {
+                        result = result | verifyAndAddTip(source.getX() - i - 1, source.getY() + i + 1);
                     }
 
                     break;
                 }
-                result = result | verifyAndAddTip(source.getX() - i, source.getY() + i);
+                if (!showOnlyKill) {
+                    result = result | verifyAndAddTip(source.getX() - i, source.getY() + i);
+                }
             }
 
-            for(int i = 1; i<tablicaPionkow.length; i++){
+            for (int i = 1; i < tablicaPionkow.length; i++) {
                 if (isBoundIndex(source.getX() + i, source.getY() - i) &&
                         tablicaPionkow[source.getX() + i][source.getY() - i] != 0) {
 
-                    if (canKill(currentSelection, tablicaPionkow[source.getX() + i][source.getY() - i] )) {
-                        result = result | verifyAndAddTip(source.getX() + i+1, source.getY() - i-1);
+                    if (canKill(currentSelection, tablicaPionkow[source.getX() + i][source.getY() - i])) {
+                        result = result | verifyAndAddTip(source.getX() + i + 1, source.getY() - i - 1);
                     }
 
                     break;
                 }
-                result = result | verifyAndAddTip(source.getX() + i, source.getY() - i);
+                if (!showOnlyKill) {
+                    result = result | verifyAndAddTip(source.getX() + i, source.getY() - i);
+                }
             }
 
-            for(int i = 1; i<tablicaPionkow.length; i++){
+            for (int i = 1; i < tablicaPionkow.length; i++) {
                 if (isBoundIndex(source.getX() - i, source.getY() - i) &&
                         tablicaPionkow[source.getX() - i][source.getY() - i] != 0) {
 
-                    if (canKill(currentSelection, tablicaPionkow[source.getX() - i][source.getY() - i] )) {
-                        result = result | verifyAndAddTip(source.getX() - i - 1, source.getY() - i-1);
+                    if (canKill(currentSelection, tablicaPionkow[source.getX() - i][source.getY() - i])) {
+                        result = result | verifyAndAddTip(source.getX() - i - 1, source.getY() - i - 1);
                     }
 
                     break;
                 }
-                result = result | verifyAndAddTip(source.getX() - i, source.getY() - i);
+                if (!showOnlyKill) {
+                    result = result | verifyAndAddTip(source.getX() - i, source.getY() - i);
+                }
             }
 
         }
